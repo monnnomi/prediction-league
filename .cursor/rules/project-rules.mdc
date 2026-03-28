@@ -1,0 +1,46 @@
+---
+description: Prediction League project rules — critical constraints for all AI-assisted development
+alwaysApply: true
+---
+
+# Prediction League — Project Rules
+
+## Do not break
+
+- **Match logic** — match definitions, match rendering, match card display, archive behavior
+- **XP logic** — `computeXpBreakdown`, `settleLivePredictionIfNeeded`, XP accumulation, profile XP
+- **Live polling** — `runTrackedLivePoll`, `getLiveTrackedMatches`, `applyLiveGameToCards`, server proxy
+- **Wallet behavior** — wallet connect/disconnect, Base chain switching, wagmi/viem integration
+- **Navigation** — all `show*View()` functions must remove `.active` from every other view
+- **Prediction flow** — form locking after kickoff, prediction saving to localStorage, deadline logic
+- **i18n** — both EN and RU translations must stay in sync, use `T()` for all user-facing text
+- **localStorage keys** — never rename storage keys without a migration path
+
+## Code style
+
+- Vanilla JS — no frameworks, no TypeScript
+- Mobile-first CSS — test on narrow screens first
+- Dark premium theme — no bright backgrounds, no neon overload
+- Incremental changes only — no rewrites, no "let me refactor this whole file"
+
+## Architecture
+
+- `script.js` — all frontend logic (single file, no module splitting for now)
+- `server.mjs` — Node.js backend: static files + API-Football proxy with caching
+- `web3/` — wallet modules, compiled into `wallet.bundle.js` via esbuild
+- `tracked-matches.json` — server-side match config (read by `server.mjs` on each request)
+
+## When adding matches
+
+1. Add new match objects to the `matches` array in `script.js`
+2. Mark old matches with `archived: true` (keep them for My Bets archive)
+3. Update `tracked-matches.json` with the same match IDs and API hints
+4. Sort active matches by `kickoffMs` ascending (earlier matches first)
+5. Use unique IDs that don't conflict with existing match IDs
+
+## When editing server.mjs
+
+- Keep API call count low — respect the 100 requests/day free tier
+- Use caching (`fixturesCache`, `eventsCache`, `negEmptyUntil`) before making upstream calls
+- `normalizeFixture` must return a consistent shape for all matches
+- `enrichWithEvents` fetches goal scorer data — cache aggressively for final matches
