@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prediction League</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="desktop-stage">
+      <div class="ambient ambient-left"></div>
+      <div class="ambient ambient-right"></div>
+
+      <main class="phone-shell">
+        <div class="phone-notch"></div>
+        <section class="app-screen">
+          <section id="matchesView" class="view active">
+            <header class="app-header">
+              <div class="brand-wrap">
+                <span class="brand-logo">PL</span>
+                <div>
+                  <p class="brand-title" data-i18n="heroTitle">Prediction League</p>
+                  <p class="brand-sub" data-i18n="brandSub">Season 1</p>
+                </div>
+              </div>
+              <div class="header-actions">
+                <button id="notifHeaderBtn" class="icon-btn notif-btn" type="button" data-i18n-aria="notifications">🔔<span id="notifBadge" class="notif-badge is-hidden"></span></button>
+                <button
+                  id="walletHeaderBtn"
+                  class="wallet-header-btn"
+                  type="button"
+                  data-i18n-aria="walletConnectAria"
+                  aria-haspopup="dialog"
+                  aria-expanded="false"
+                >
+                  <span class="wallet-header-glyph" aria-hidden="true">◇</span>
+                  <span id="walletHeaderLabel" class="wallet-header-label" data-i18n="walletShortLabel">Wallet</span>
+                </button>
+                <button id="langToggle" class="lang-toggle" type="button" aria-label="Language">RU</button>
+              </div>
+            </header>
+
+            <div class="view-scroll">
+              <section class="hero-card panel">
+                <div class="hero-xp-minimal">
+                  <div class="hero-xp-top">
+                    <span id="heroLevel" class="hero-level">Level 3</span>
+                    <span id="heroRankMeta" class="hero-rank">1,240 XP</span>
+                  </div>
+                  <div class="hero-xp-bar">
+                    <span id="heroXpFillBar" class="hero-xp-fill"></span>
+                  </div>
+                </div>
+              </section>
+
+              <section class="section-head">
+                <h3 data-i18n="sectionMatches">Matches</h3>
+              </section>
+              <div id="matchesList" class="matches-list"></div>
+            </div>
+          </section>
+
+          <section id="predictionView" class="view">
+            <header class="prediction-top">
+              <button id="backBtn" class="icon-btn icon-btn-dark" type="button" data-i18n-aria="backAria">←</button>
+              <div>
+                <p id="matchHeaderTitle" class="pred-title">Switzerland vs Germany</p>
+                <p id="matchHeaderDate" class="pred-date">Football • Friendlies</p>
+              </div>
+            </header>
+
+            <div class="view-scroll prediction-scroll">
+              <section class="match-hero panel">
+                <div id="countdownPill" class="close-pill">
+                  <span id="countdownPillPrefix" data-i18n="countdownPrefix">Predictions close in</span>
+                  <span id="countdownText">03:14:22</span>
+                </div>
+                <div id="liveScoreBanner" class="live-score-banner is-hidden">
+                  <span class="live-dot" aria-hidden="true"></span>
+                  <span id="liveScoreBannerText">Live — : —</span>
+                </div>
+                <div id="predGoalsList" class="pred-goals-list is-hidden"></div>
+                <div class="teams-hero">
+                  <div class="team-chip">
+                    <span id="homeBadge" class="team-badge">SUI</span>
+                    <span id="homeName">Switzerland</span>
+                  </div>
+                  <span class="vs" data-i18n="vs">vs</span>
+                  <div class="team-chip">
+                    <span id="awayBadge" class="team-badge">GER</span>
+                    <span id="awayName">Germany</span>
+                  </div>
+                </div>
+                <div class="pill-row match-hero-pills">
+                  <span class="stat-pill stat-pill-hero-single" data-i18n="cardMarketsLine">4 markets • +XP</span>
+                </div>
+              </section>
+
+              <section id="progressPanel" class="panel compact-panel">
+                <p class="progress-label" data-i18n="progressLabel">Prediction progress</p>
+                <div class="row-between">
+                  <div>
+                    <p class="micro" data-i18n="potentialXp">Potential XP</p>
+                    <p id="xpValue" class="big-value" data-i18n="xpBig">+120 XP</p>
+                  </div>
+                  <div>
+                    <p class="micro" data-i18n="microProgress">Progress</p>
+                    <p id="selectedSummary" class="big-value">0/4 selected</p>
+                  </div>
+                </div>
+                <div class="progress-track">
+                  <span id="progressBar" class="progress-fill"></span>
+                </div>
+              </section>
+
+              <section id="predictionForm" class="prediction-form">
+                <article class="panel card-stack">
+                  <div class="row-between">
+                    <h3 data-i18n="formOutcome">1. Match Outcome</h3>
+                    <span class="market-badge" data-i18n="badgeRequired">Required</span>
+                  </div>
+                  <div id="outcomeOptions" class="segmented"></div>
+                </article>
+
+                <article class="panel card-stack">
+                  <div class="row-between">
+                    <h3 data-i18n="formExact">2. Exact Score</h3>
+                    <span class="market-badge" data-i18n="badgeRequired">Required</span>
+                  </div>
+                  <div class="score-board">
+                    <div class="score-col">
+                      <p id="homeScoreLabel">Switzerland</p>
+                      <div class="stepper">
+                        <button type="button" class="step-btn" data-step-team="home" data-step-dir="-1">-</button>
+                        <span id="homeScoreValue" class="score-value">1</span>
+                        <button type="button" class="step-btn" data-step-team="home" data-step-dir="1">+</button>
+                      </div>
+                    </div>
+                    <div class="score-col">
+                      <p id="awayScoreLabel">Germany</p>
+                      <div class="stepper">
+                        <button type="button" class="step-btn" data-step-team="away" data-step-dir="-1">-</button>
+                        <span id="awayScoreValue" class="score-value">1</span>
+                        <button type="button" class="step-btn" data-step-team="away" data-step-dir="1">+</button>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="panel card-stack">
+                  <div class="row-between">
+                    <h3 data-i18n="formTotal">3. Total Goals</h3>
+                    <span class="market-badge" data-i18n="badgeRequired">Required</span>
+                  </div>
+                  <div id="totalGoalsOptions" class="segmented"></div>
+                </article>
+
+                <article class="panel card-stack">
+                  <div class="row-between">
+                    <h3 data-i18n="formFirst">4. First Team To Score</h3>
+                    <span class="market-badge" data-i18n="badgeRequired">Required</span>
+                  </div>
+                  <div id="firstToScoreOptions" class="segmented"></div>
+                </article>
+
+                <article class="panel card-stack confidence-block">
+                  <div class="row-between">
+                    <h3 data-i18n="formConfidence">🔥 Confidence Pick</h3>
+                    <span class="market-badge premium" data-i18n="badgeBoost">Boost</span>
+                  </div>
+                  <p class="confidence-text" data-i18n="confidenceHint">Choose one prediction to boost if correct.</p>
+                  <div id="confidenceOptions" class="chip-grid confidence-grid"></div>
+                </article>
+              </section>
+            </div>
+
+            <div class="bottom-action">
+              <div class="action-meta">
+                <p id="actionSelected">Selected: 0/4</p>
+                <p id="actionConfidence">Confidence: not selected</p>
+              </div>
+              <button id="submitBtn" class="submit-btn" type="button" disabled data-i18n="submit">Submit Prediction</button>
+            </div>
+          </section>
+
+          <section id="leaderboardView" class="view">
+            <div class="view-scroll">
+              <section class="section-head">
+                <h3 data-i18n="lbTitle">Leaderboard</h3>
+                <span class="lb-season-badge" data-i18n="lbSeason">Season 1</span>
+              </section>
+              <div class="lb-table-wrap">
+                <div class="lb-header">
+                  <span class="lb-col-rank" data-i18n="lbRank">#</span>
+                  <span class="lb-col-player" data-i18n="lbPlayer">Player</span>
+                  <span class="lb-col-xp" data-i18n="lbXp">XP</span>
+                </div>
+                <div id="leaderboardBody" class="lb-body"></div>
+              </div>
+            </div>
+          </section>
+
+          <section id="profileView" class="view">
+            <div class="view-scroll">
+              <div id="profileContent" class="profile-content"></div>
+            </div>
+          </section>
+
+          <section id="myBetsView" class="view">
+            <div class="view-scroll">
+              <section class="section-head">
+                <h3 data-i18n="myBetsTitle">My Predictions</h3>
+              </section>
+              <div id="myBetsList" class="matches-list"></div>
+            </div>
+          </section>
+
+          <nav class="bottom-nav">
+            <button class="nav-item active" type="button" data-nav="home">
+              🏠 <span data-i18n="navHome">Home</span>
+            </button>
+            <button class="nav-item" type="button" data-nav="matches">
+              ⚽ <span data-i18n="navMatches">Matches</span>
+            </button>
+            <button class="nav-item" type="button" data-nav="leaderboard">
+              🏆 <span data-i18n="navLeaderboard">Leaderboard</span>
+            </button>
+            <button class="nav-item" type="button" data-nav="profile">
+              👤 <span data-i18n="navProfile">Profile</span>
+            </button>
+          </nav>
+        </section>
+      </main>
+    </div>
+
+    <div
+      id="walletSheet"
+      class="wallet-sheet"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-labelledby="walletSheetTitle"
+    >
+      <button
+        type="button"
+        class="wallet-sheet-backdrop"
+        id="walletSheetBackdrop"
+        tabindex="-1"
+        data-i18n-aria="walletCloseSheet"
+      ></button>
+      <div class="wallet-sheet-panel panel">
+        <div class="wallet-sheet-head">
+          <h3 id="walletSheetTitle" class="wallet-sheet-title" data-i18n="walletTitle">Wallet</h3>
+          <button type="button" class="icon-btn wallet-sheet-close" id="walletSheetClose" data-i18n-aria="backAria">×</button>
+        </div>
+        <div id="walletDisconnected" class="wallet-sheet-body">
+          <p class="wallet-sheet-hint" data-i18n="walletOptionalHint">Optional. Predictions and XP work without a wallet.</p>
+          <button type="button" class="wallet-primary-btn" id="walletConnectBtn" data-i18n="walletConnect">Connect Wallet</button>
+          <button type="button" class="wallet-ghost-btn" id="walletContinueGuestBtn" data-i18n="walletContinueGuest">
+            Continue as Guest
+          </button>
+        </div>
+        <div id="walletConnected" class="wallet-sheet-body is-hidden">
+          <p class="wallet-status-ok" id="walletConnectedLine" data-i18n="walletConnected">Connected</p>
+          <p id="walletAddressDisplay" class="wallet-address-display"></p>
+          <p id="walletNetworkLine" class="wallet-network-line"></p>
+          <div id="walletWrongNetwork" class="wallet-wrong-network is-hidden">
+            <p data-i18n="walletWrongNetwork">Wrong network</p>
+            <button type="button" class="wallet-primary-btn" id="walletSwitchBaseBtn" data-i18n="walletSwitchToBase">
+              Switch to Base
+            </button>
+          </div>
+          <button type="button" class="wallet-secondary-btn" id="walletCopyBtn" data-i18n="walletCopyAddress">Copy Address</button>
+          <button type="button" class="wallet-ghost-btn" id="walletDisconnectBtn" data-i18n="walletDisconnect">Disconnect</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="./identity.js"></script>
+    <script src="./wallet.bundle.js?v=plw3"></script>
+    <script src="./i18n.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
