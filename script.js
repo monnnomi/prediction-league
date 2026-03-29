@@ -35,6 +35,7 @@ const COUNTRY_FLAGS = {
   Hungary: "🇭🇺", Greece: "🇬🇷", Finland: "🇫🇮", Ireland: "🇮🇪",
   Iceland: "🇮🇸", Albania: "🇦🇱", "Bosnia and Herzegovina": "🇧🇦",
   Montenegro: "🇲🇪", "North Macedonia": "🇲🇰", Slovenia: "🇸🇮",
+  Armenia: "🇦🇲", Belarus: "🇧🇾", Lithuania: "🇱🇹", Georgia: "🇬🇪",
   Slovakia: "🇸🇰", Bulgaria: "🇧🇬", Paraguay: "🇵🇾", Venezuela: "🇻🇪"
 };
 
@@ -66,9 +67,62 @@ function buildGoalsHtml(game) {
 
 const matches = [
   {
+    id: 309,
+    type: "football",
+    liveApi: true,
+    league: "Friendlies",
+    homeTeam: "Mexico",
+    awayTeam: "Portugal",
+    apiDate: "2026-03-29",
+    date: "29 Mar 2026, 04:00 UTC",
+    kickoffMs: Date.parse("2026-03-29T04:00:00+00:00"),
+    apiHomeHints: ["Mexico"],
+    apiAwayHints: ["Portugal"]
+  },
+  {
+    id: 310,
+    type: "football",
+    liveApi: true,
+    league: "Friendlies",
+    homeTeam: "Armenia",
+    awayTeam: "Belarus",
+    apiDate: "2026-03-29",
+    date: "29 Mar 2026, 16:00 UTC",
+    kickoffMs: Date.parse("2026-03-29T16:00:00+00:00"),
+    apiHomeHints: ["Armenia"],
+    apiAwayHints: ["Belarus"]
+  },
+  {
+    id: 311,
+    type: "football",
+    liveApi: true,
+    league: "Friendlies",
+    homeTeam: "Lithuania",
+    awayTeam: "Georgia",
+    apiDate: "2026-03-29",
+    date: "29 Mar 2026, 16:00 UTC",
+    kickoffMs: Date.parse("2026-03-29T16:00:00+00:00"),
+    apiHomeHints: ["Lithuania"],
+    apiAwayHints: ["Georgia"]
+  },
+  {
+    id: 312,
+    type: "football",
+    liveApi: true,
+    league: "Friendlies",
+    homeTeam: "Colombia",
+    awayTeam: "France",
+    apiDate: "2026-03-29",
+    date: "29 Mar 2026, 22:00 UTC",
+    kickoffMs: Date.parse("2026-03-29T22:00:00+00:00"),
+    apiHomeHints: ["Colombia"],
+    apiAwayHints: ["France"]
+  },
+  {
     id: 306,
     type: "football",
     liveApi: true,
+    archived: true,
     league: "Friendlies",
     homeTeam: "Scotland",
     awayTeam: "Japan",
@@ -82,6 +136,7 @@ const matches = [
     id: 307,
     type: "football",
     liveApi: true,
+    archived: true,
     league: "Friendlies",
     homeTeam: "Hungary",
     awayTeam: "Slovenia",
@@ -95,6 +150,7 @@ const matches = [
     id: 308,
     type: "football",
     liveApi: true,
+    archived: true,
     league: "Friendlies",
     homeTeam: "USA",
     awayTeam: "Belgium",

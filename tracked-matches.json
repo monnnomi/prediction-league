@@ -1,5 +1,41 @@
 [
   {
+    "id": 309,
+    "apiDate": "2026-03-29",
+    "apiHomeHint": "Mexico",
+    "apiAwayHint": "Portugal",
+    "apiHomeHints": ["Mexico"],
+    "apiAwayHints": ["Portugal"],
+    "tryAdjacentDates": false
+  },
+  {
+    "id": 310,
+    "apiDate": "2026-03-29",
+    "apiHomeHint": "Armenia",
+    "apiAwayHint": "Belarus",
+    "apiHomeHints": ["Armenia"],
+    "apiAwayHints": ["Belarus"],
+    "tryAdjacentDates": false
+  },
+  {
+    "id": 311,
+    "apiDate": "2026-03-29",
+    "apiHomeHint": "Lithuania",
+    "apiAwayHint": "Georgia",
+    "apiHomeHints": ["Lithuania"],
+    "apiAwayHints": ["Georgia"],
+    "tryAdjacentDates": false
+  },
+  {
+    "id": 312,
+    "apiDate": "2026-03-29",
+    "apiHomeHint": "Colombia",
+    "apiAwayHint": "France",
+    "apiHomeHints": ["Colombia"],
+    "apiAwayHints": ["France"],
+    "tryAdjacentDates": false
+  },
+  {
     "id": 306,
     "apiDate": "2026-03-28",
     "apiHomeHint": "Scotland",
