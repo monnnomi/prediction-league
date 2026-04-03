@@ -4,14 +4,17 @@
   "type": "module",
   "scripts": {
     "build": "npm run build:wallet",
-    "build:wallet": "esbuild web3/wallet-entry.mjs --bundle --format=iife --global-name=PLWallet --outfile=wallet.bundle.js --platform=browser --legal-comments=none",
+    "build:wallet": "node web3/build.mjs",
     "prestart": "npm run build:wallet",
     "predev": "npm run build:wallet",
     "start": "node server.mjs",
     "dev": "node server.mjs"
   },
   "dependencies": {
+    "@wagmi/connectors": "^8.0.0",
     "@wagmi/core": "^3.4.1",
+    "@walletconnect/ethereum-provider": "^2.23.9",
+    "@walletconnect/modal": "^2.7.0",
     "dotenv": "^17.3.1",
     "viem": "^2.47.6"
   },

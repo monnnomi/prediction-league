@@ -7,9 +7,11 @@ import { BASE_SEPOLIA_ID } from "./chains.mjs";
 import {
   BASE_CHAIN_ID,
   connectBrowserWallet,
+  connectWalletConnect,
   disconnectWallet,
   getWalletState,
   initWalletRuntime,
+  isWalletConnectAvailable,
   subscribeWallet,
   switchWalletToBase
 } from "./wallet-runtime.mjs";
@@ -23,5 +25,7 @@ export async function init() {
 export const getState = getWalletState;
 export const subscribe = subscribeWallet;
 export const connect = connectBrowserWallet;
+export const connectWC = connectWalletConnect;
+export const hasWC = isWalletConnectAvailable;
 export const disconnect = disconnectWallet;
 export const switchToBase = switchWalletToBase;

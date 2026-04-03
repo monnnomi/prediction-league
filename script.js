@@ -1976,6 +1976,7 @@ const walletSheet = document.getElementById("walletSheet");
 const walletSheetBackdrop = document.getElementById("walletSheetBackdrop");
 const walletSheetClose = document.getElementById("walletSheetClose");
 const walletConnectBtn = document.getElementById("walletConnectBtn");
+const walletWCBtn = document.getElementById("walletWCBtn");
 const walletContinueGuestBtn = document.getElementById("walletContinueGuestBtn");
 const walletCopyBtn = document.getElementById("walletCopyBtn");
 const walletDisconnectBtn = document.getElementById("walletDisconnectBtn");
@@ -2095,6 +2096,26 @@ function installWalletUi() {
     }
   });
 
+  walletWCBtn?.addEventListener("click", async () => {
+    const W = window.PLWallet;
+    if (!W?.connectWC) {
+      showToast(T("walletConnectFail"));
+      return;
+    }
+    try {
+      await W.connectWC();
+      refreshWalletPanelUi();
+    } catch (err) {
+      console.warn("[PL Wallet] WC connect rejected or error", err);
+      const rejected =
+        err?.code === 4001 ||
+        err?.name === "UserRejectedRequestError" ||
+        err?.cause?.code === 4001 ||
+        err?.cause?.name === "UserRejectedRequestError";
+      showToast(rejected ? T("walletConnectRejected") : T("walletConnectFail"));
+    }
+  });
+
   walletDisconnectBtn?.addEventListener("click", async () => {
     const W = window.PLWallet;
     if (!W?.disconnect) return;
@@ -2142,6 +2163,9 @@ function installWalletUi() {
     }
     try {
       await W.init();
+      if (walletWCBtn && W.hasWC && W.hasWC()) {
+        walletWCBtn.classList.remove("is-hidden");
+      }
       W.subscribe(() => refreshWalletPanelUi());
       refreshWalletPanelUi();
     } catch (e) {

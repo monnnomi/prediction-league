@@ -1,5 +1,5 @@
 /**
- * Wagmi config — один injected-коннектор с явным выбором EIP-1193 провайдера.
+ * Wagmi config — injected connector + optional WalletConnect.
  * multiInjectedProviderDiscovery выключен: иначе несколько коннекторов + window.ethereum
  * дают непредсказуемый порядок и «молчаливые» ошибки в Rabby/MetaMask.
  */
@@ -10,7 +10,10 @@ import {
   injected,
   noopStorage
 } from "@wagmi/core";
+import { walletConnect } from "@wagmi/connectors";
 import { plChains, primaryChain } from "./chains.mjs";
+
+const WC_PROJECT_ID = typeof __WC_PROJECT_ID__ !== "undefined" ? __WC_PROJECT_ID__ : "";
 
 function browserLocalStorage() {
   if (typeof window === "undefined" || !window.localStorage) return noopStorage;
@@ -65,19 +68,36 @@ export function pickInjectedProvider(win) {
 }
 
 export function createPlWagmiConfig() {
+  const connectors = [
+    injected({
+      shimDisconnect: false,
+      target: {
+        id: "pl-browser-wallet",
+        name: "Browser wallet",
+        provider: pickInjectedProvider
+      }
+    })
+  ];
+
+  if (WC_PROJECT_ID) {
+    connectors.push(
+      walletConnect({
+        projectId: WC_PROJECT_ID,
+        metadata: {
+          name: "Prediction League",
+          description: "Football prediction app on Base",
+          url: typeof window !== "undefined" ? window.location.origin : "https://prediction-league.app",
+          icons: []
+        },
+        showQrModal: true
+      })
+    );
+  }
+
   return createConfig({
     chains: plChains,
     multiInjectedProviderDiscovery: false,
-    connectors: [
-      injected({
-        shimDisconnect: false,
-        target: {
-          id: "pl-browser-wallet",
-          name: "Browser wallet",
-          provider: pickInjectedProvider
-        }
-      })
-    ],
+    connectors,
     storage: plWagmiStorage,
     transports: {
       [plChains[0].id]: http(),
@@ -87,4 +107,4 @@ export function createPlWagmiConfig() {
   });
 }
 
-export { primaryChain };
+export { primaryChain, WC_PROJECT_ID };

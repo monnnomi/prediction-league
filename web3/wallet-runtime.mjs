@@ -8,7 +8,7 @@ import {
   switchChain,
   watchConnection
 } from "@wagmi/core";
-import { createPlWagmiConfig, primaryChain } from "./wagmi-config.mjs";
+import { createPlWagmiConfig, primaryChain, WC_PROJECT_ID } from "./wagmi-config.mjs";
 import { BASE_MAINNET_ID, isSupportedPlChain } from "./chains.mjs";
 
 let config;
@@ -139,6 +139,44 @@ export async function connectBrowserWallet() {
 
 export async function disconnectWallet() {
   await disconnect(requireConfig());
+}
+
+export function isWalletConnectAvailable() {
+  return Boolean(WC_PROJECT_ID);
+}
+
+export async function connectWalletConnect() {
+  await initWalletRuntime();
+  const c = requireConfig();
+  const targetId = primaryChain.id;
+
+  const list = getConnectors(c);
+  const connector = list.find((cn) => cn.type === "walletConnect");
+  if (!connector) {
+    throw new Error("WalletConnect is not configured — set WC_PROJECT_ID");
+  }
+
+  try {
+    await connect(c, { connector });
+  } catch (e) {
+    const already =
+      e instanceof ConnectorAlreadyConnectedError ||
+      e?.name === "ConnectorAlreadyConnectedError";
+    if (!already) throw e;
+  }
+
+  const conn = getConnection(c);
+  if (conn.status !== "connected" || !conn.address) {
+    throw new Error("WalletConnect connection did not complete");
+  }
+
+  if (conn.chainId !== targetId) {
+    try {
+      await switchChain(c, { chainId: targetId });
+    } catch {
+      /* user declined network switch — stay connected */
+    }
+  }
 }
 
 export async function switchWalletToBase() {
