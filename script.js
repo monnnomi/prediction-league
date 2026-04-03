@@ -989,8 +989,10 @@ function renderMyBets() {
 
   const seen = new Set();
   const allBetMatches = [];
+  const todayStr = new Date().toISOString().slice(0, 10);
 
   for (const m of matches) {
+    if (m.archived && m.apiDate < todayStr) continue;
     const key = predictionStorageKey(m);
     const hasPred = Boolean(preds[key]);
     if (hasPred || m.archived) {
