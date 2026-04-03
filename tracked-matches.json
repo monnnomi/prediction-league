@@ -1,5 +1,50 @@
 [
   {
+    "id": 313,
+    "apiDate": "2026-04-03",
+    "apiHomeHint": "Al Nassr",
+    "apiAwayHint": "Al Najma",
+    "apiHomeHints": ["Al Nassr", "Al-Nassr"],
+    "apiAwayHints": ["Al Najma", "Al-Najma"],
+    "tryAdjacentDates": false
+  },
+  {
+    "id": 314,
+    "apiDate": "2026-04-03",
+    "apiHomeHint": "Paris Saint Germain",
+    "apiAwayHint": "Toulouse",
+    "apiHomeHints": ["Paris Saint Germain", "Paris Saint-Germain", "PSG"],
+    "apiAwayHints": ["Toulouse", "Toulouse FC"],
+    "tryAdjacentDates": false
+  },
+  {
+    "id": 315,
+    "apiDate": "2026-04-03",
+    "apiHomeHint": "Sporting CP",
+    "apiAwayHint": "Santa Clara",
+    "apiHomeHints": ["Sporting CP", "Sporting", "Sporting Lisbon"],
+    "apiAwayHints": ["Santa Clara", "CD Santa Clara"],
+    "tryAdjacentDates": false
+  },
+  {
+    "id": 316,
+    "apiDate": "2026-04-03",
+    "apiHomeHint": "Santos",
+    "apiAwayHint": "Remo",
+    "apiHomeHints": ["Santos", "Santos FC"],
+    "apiAwayHints": ["Remo", "Clube do Remo"],
+    "tryAdjacentDates": false
+  },
+  {
+    "id": 317,
+    "apiDate": "2026-04-03",
+    "apiHomeHint": "Palmeiras",
+    "apiAwayHint": "Gremio",
+    "apiHomeHints": ["Palmeiras", "SE Palmeiras"],
+    "apiAwayHints": ["Gremio", "Grêmio"],
+    "tryAdjacentDates": false
+  },
+  {
     "id": 309,
     "apiDate": "2026-03-29",
     "apiHomeHint": "Mexico",
@@ -33,78 +78,6 @@
     "apiAwayHint": "France",
     "apiHomeHints": ["Colombia"],
     "apiAwayHints": ["France"],
-    "tryAdjacentDates": false
-  },
-  {
-    "id": 306,
-    "apiDate": "2026-03-28",
-    "apiHomeHint": "Scotland",
-    "apiAwayHint": "Japan",
-    "apiHomeHints": ["Scotland"],
-    "apiAwayHints": ["Japan"],
-    "tryAdjacentDates": false
-  },
-  {
-    "id": 307,
-    "apiDate": "2026-03-28",
-    "apiHomeHint": "Hungary",
-    "apiAwayHint": "Slovenia",
-    "apiHomeHints": ["Hungary"],
-    "apiAwayHints": ["Slovenia"],
-    "tryAdjacentDates": false
-  },
-  {
-    "id": 308,
-    "apiDate": "2026-03-28",
-    "apiHomeHint": "USA",
-    "apiAwayHint": "Belgium",
-    "apiHomeHints": ["USA", "United States"],
-    "apiAwayHints": ["Belgium"],
-    "tryAdjacentDates": false
-  },
-  {
-    "id": 301,
-    "apiDate": "2026-03-27",
-    "apiHomeHint": "Switzerland",
-    "apiAwayHint": "Germany",
-    "apiHomeHints": ["Switzerland"],
-    "apiAwayHints": ["Germany"],
-    "tryAdjacentDates": false
-  },
-  {
-    "id": 302,
-    "apiDate": "2026-03-27",
-    "apiHomeHint": "Netherlands",
-    "apiAwayHint": "Norway",
-    "apiHomeHints": ["Netherlands"],
-    "apiAwayHints": ["Norway"],
-    "tryAdjacentDates": false
-  },
-  {
-    "id": 303,
-    "apiDate": "2026-03-27",
-    "apiHomeHint": "England",
-    "apiAwayHint": "Uruguay",
-    "apiHomeHints": ["England"],
-    "apiAwayHints": ["Uruguay"],
-    "tryAdjacentDates": false
-  },
-  {
-    "id": 304,
-    "apiDate": "2026-03-27",
-    "apiHomeHint": "Spain",
-    "apiAwayHint": "Serbia",
-    "apiHomeHints": ["Spain"],
-    "apiAwayHints": ["Serbia"],
-    "tryAdjacentDates": false
-  },
-  {
-    "id": 305,
-    "apiDate": "2026-03-27",
-    "apiHomeHint": "Austria",
-    "apiAwayHint": "Ghana",
-    "apiHomeHints": ["Austria"],
-    "apiAwayHints": ["Ghana"],
     "tryAdjacentDates": false
   }
 ]
