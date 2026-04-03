@@ -2155,6 +2155,38 @@ if (walletHeaderBtn) {
   installWalletUi();
 }
 
+function settleAllPendingPredictions() {
+  const preds = loadPredictions();
+  const settled = new Set(loadSettled());
+  let changed = false;
+
+  for (const match of matches) {
+    const key = predictionStorageKey(match);
+    if (settled.has(key)) continue;
+    const pred = preds[key];
+    if (!pred) continue;
+    const g = getMatchGameData(match);
+    if (!g || g.noData) continue;
+    if (!isFinalFootballStatus(g.statusShort, g.statusLong)) continue;
+
+    const h = Number(g.homeScore) || 0;
+    const a = Number(g.awayScore) || 0;
+    const { xp } = computeXpBreakdown(pred, h, a);
+
+    const profile = loadProfile();
+    profile.xp = (Number(profile.xp) || 0) + xp;
+    saveProfile(profile);
+
+    settled.add(key);
+    changed = true;
+  }
+
+  if (changed) {
+    saveSettled([...settled]);
+    updateHeroXp();
+  }
+}
+
 async function fetchArchivedResults() {
   const archived = matches.filter(m => m.archived && m.liveApi);
   if (!archived.length) return;
@@ -2175,6 +2207,7 @@ async function fetchArchivedResults() {
       saveMatchResult(match, row.game);
       state.liveSnapshotsByMatchId[match.id] = row.game;
     }
+    settleAllPendingPredictions();
     if (myBetsView?.classList.contains("active")) renderMyBets();
   } catch (err) {
     console.warn("[PL] Failed to fetch archived results:", err?.message);
@@ -2184,5 +2217,6 @@ async function fetchArchivedResults() {
 updateHeroXp();
 renderMatches();
 startLivePolling();
+settleAllPendingPredictions();
 fetchArchivedResults();
 refreshSelectionUI();
